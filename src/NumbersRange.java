@@ -1,7 +1,11 @@
-/* Author: Mahesh Naidoo
+/** 
+ * Author: Mahesh Naidoo
  * Date: 26 - 11 - 2020
- * Class to create objects to access the interface and implement 
- * abstract methods
+ * Class to create objects to access the interface and implement abstract 
+ * methods
+ * Assumptions:
+    * No repeating numbers
+    * No empty input.
  */
 
 import java.util.Collection;
@@ -10,7 +14,11 @@ import java.util.ArrayList;
 
 public class NumbersRange implements NumberRangeSummarizer
 {
-    //collect the input
+    /**
+     * Collects input values by converting from string to a Collection
+     * Chosen collection sub-class is Array list
+     * Efficiency: O(n).
+     */
     public Collection<Integer> collect(String input)
     {
         String[] elements = input.split(",");
@@ -19,13 +27,18 @@ public class NumbersRange implements NumberRangeSummarizer
         {
             numbers.add(Integer.parseInt(elements[i]));
         }
-        //for (Integer num : numbers) { 		      
-          // System.out.println(num); 		
-        //}
         return numbers;
     }
 
-    //get the summarized string
+    /**
+     * For n-1 values, check if the next value is equal to the current
+     * if true and it is first of the sequence, add that to output
+     * if false, and the previous had been a sequence, add to output the last 
+     * value
+     * if false and the previous was not part of sequence add to output
+     * finally add the nth value to the output
+     * Efficiency = O(n). 
+     */
     public String summarizeCollection(Collection<Integer> input)
     {
         Integer prev =0;
@@ -35,7 +48,6 @@ public class NumbersRange implements NumberRangeSummarizer
         System.out.println("");
         for(int i = 1; i < input.size();i++)
         {
-            //System.out.println(output);
             if((Integer)input.toArray()[prev] + 1  == ((Integer)input.toArray()[i]))
             {
                 if(count == 0)
@@ -55,9 +67,7 @@ public class NumbersRange implements NumberRangeSummarizer
                 }
                 else{
                     output = output + input.toArray()[prev]+", ";  
-                }
-                
-                
+                } 
             }
             prev++;
         }
